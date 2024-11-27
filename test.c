@@ -24,7 +24,8 @@ void afficherMenu(void) {
     printf("\n=== Menu ===\n");
     printf("1. Ajouter une tache\n");
     printf("2. Afficher liste tache\n");
-    printf("3. Quitter\n");
+    printf("3. Modifier une tache\n");
+    printf("4. Quitter\n");
     printf("Choisissez une option: ");
 }
 
@@ -66,9 +67,41 @@ void afficherListesTaches(void) {
         }
     }
 }
+void modifierTache(void) {
+    int numeroTache;
+    printf("Entrer le numero de la tache a modifier: ");
+    if (scanf("%d", &numeroTache) != 1) {
+        printf("Entree invalide.\n");
+        clearBuffer();
+        return;
+    }
+    clearBuffer();
 
+    if (numeroTache < 1 || numeroTache > nombreDeTaches) {
+        printf("Numero de tache incorrect.\n");
+        return;
+    }
 
+    int index = numeroTache - 1;
 
+    printf("Nouveau titre de la tache: ");
+    fgets(taches[index].titre, MAX_LEN, stdin);
+    strtok(taches[index].titre, "\n");
+
+    printf("Nouvelle description de la tache: ");
+    fgets(taches[index].description, MAX_LEN, stdin);
+    strtok(taches[index].description, "\n");
+
+    printf("Nouvelle date d'echeance: ");
+    fgets(taches[index].dateecheance, MAX_LEN, stdin);
+    strtok(taches[index].dateecheance, "\n");
+
+    printf("Nouvelle priorite (high/low): ");
+    fgets(taches[index].priorite, MAX_LEN, stdin);
+    strtok(taches[index].priorite, "\n");
+
+    printf("Tache modifiee avec succes.\n");
+}
 int main(void) {
     int choix;
 
@@ -89,6 +122,9 @@ int main(void) {
                 afficherListesTaches();
                 break;  
             case 3:
+                modifierTache();
+                break;
+            case 4:
                 printf("Au revoir !\n");
                 exit(0);
             default:
