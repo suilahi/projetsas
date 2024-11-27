@@ -26,7 +26,8 @@ void afficherMenu(void) {
     printf("2. Afficher liste tache\n");
     printf("3. Modifier une tache\n");
     printf("4. Supprimer une tache\n");        
-    printf("5. Quitter\n");
+    printf("5. Filtrer par priorite\n");
+    printf("6. Quitter\n");
     printf("Choisissez une option: ");
 }
 
@@ -127,6 +128,29 @@ void supprimerTache(void) {
     nombreDeTaches--;
     printf("Tache supprimee avec succes.\n");
 }
+void filtrerParPriorite(void) {
+    char prioriteFiltree[MAX_LEN];
+    int trouve = 0;
+
+    printf("Entrer la priorite a filtrer (high/low): ");
+    fgets(prioriteFiltree, MAX_LEN, stdin);
+    strtok(prioriteFiltree, "\n");
+
+    printf("\n== Taches de priorite %s ==\n", prioriteFiltree);
+    for (int i = 0; i < nombreDeTaches; i++) {
+        if (strcmp(taches[i].priorite, prioriteFiltree) == 0) {
+            printf("Tache %d:\n", i + 1);
+            printf("  Titre: %s\n", taches[i].titre);
+            printf("  Description: %s\n", taches[i].description);
+            printf("  Date d'echeance: %s\n", taches[i].dateecheance);
+            trouve = 1;
+        }
+    }
+    if (!trouve) {
+        printf("Aucune tache trouvee avec cette priorite.\n");
+    }
+}
+
 int main(void) {
     int choix;
 
@@ -153,6 +177,9 @@ int main(void) {
                 supprimerTache();
                 break;
             case 5:
+                filtrerParPriorite();
+                break;
+            case 6:
                 printf("Au revoir !\n");
                 exit(0);
             default:
