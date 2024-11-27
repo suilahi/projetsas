@@ -25,7 +25,8 @@ void afficherMenu(void) {
     printf("1. Ajouter une tache\n");
     printf("2. Afficher liste tache\n");
     printf("3. Modifier une tache\n");
-    printf("4. Quitter\n");
+    printf("4. Supprimer une tache\n");        
+    printf("5. Quitter\n");
     printf("Choisissez une option: ");
 }
 
@@ -102,6 +103,30 @@ void modifierTache(void) {
 
     printf("Tache modifiee avec succes.\n");
 }
+void supprimerTache(void) {
+    int numeroTache;
+
+    printf("Entrer le numero de la tache a supprimer: ");
+    if (scanf("%d", &numeroTache) != 1) {
+        printf("Entree invalide.\n");
+        clearBuffer();
+        return;
+    }
+    clearBuffer();
+
+    if (numeroTache < 1 || numeroTache > nombreDeTaches) {
+        printf("Numero de tache incorrect.\n");
+        return;
+    }
+
+    int index = numeroTache - 1;
+    for (int i = index; i < nombreDeTaches - 1; i++) {
+        taches[i] = taches[i + 1];
+    }
+
+    nombreDeTaches--;
+    printf("Tache supprimee avec succes.\n");
+}
 int main(void) {
     int choix;
 
@@ -125,6 +150,9 @@ int main(void) {
                 modifierTache();
                 break;
             case 4:
+                supprimerTache();
+                break;
+            case 5:
                 printf("Au revoir !\n");
                 exit(0);
             default:
