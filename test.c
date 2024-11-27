@@ -23,7 +23,8 @@ void clearBuffer(void) {
 void afficherMenu(void) {
     printf("\n=== Menu ===\n");
     printf("1. Ajouter une tache\n");
-    printf("2. Quitter\n");
+    printf("2. Afficher liste tache\n");
+    printf("3. Quitter\n");
     printf("Choisissez une option: ");
 }
 
@@ -51,6 +52,20 @@ void ajouterTache(void) {
         printf("Le nombre maximum de taches a ete atteint.\n");
     }           
 }
+void afficherListesTaches(void) {
+    if (nombreDeTaches == 0) {
+        printf("Aucune tache a afficher.\n");
+    } else {
+        printf("\n== Liste des taches ==\n");
+        for (int i = 0; i < nombreDeTaches; i++) {
+            printf("Tache %d:\n", i + 1);
+            printf("  Titre: %s\n", taches[i].titre);
+            printf("  Description: %s\n", taches[i].description);
+            printf("  Date d'echeance: %s\n", taches[i].dateecheance);
+            printf("  Priorite: %s\n", taches[i].priorite);
+        }
+    }
+}
 
 
 
@@ -71,6 +86,9 @@ int main(void) {
                 ajouterTache();
                 break;
             case 2:
+                afficherListesTaches();
+                break;  
+            case 3:
                 printf("Au revoir !\n");
                 exit(0);
             default:
