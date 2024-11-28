@@ -16,8 +16,7 @@ Tache taches[MAX_TACHES];
 int nombreDeTaches = 0;
 
 void clearBuffer(void) {
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF) {}
+  getchar();
 }
 
 void afficherMenu(void) {
